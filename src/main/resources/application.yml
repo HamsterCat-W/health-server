@@ -2,14 +2,24 @@
 spring:
   #mysql配置
   datasource:
+#    initialization-mode: always
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/healthmanagement?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/healthmanagement?useSSL=false&useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
     username: root
     password: root
 
-mybatis:
-  mapper-locations: classpath:mapper/*.xml
-  type-aliases-package: com.example.demo.model
+  jpa:
+    #这个参数是在建表的时候，将默认的存储引擎切换为 InnoDB 用的
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    #配置在日志中打印出执行的 SQL 语句信息。
+    show-sql: true
+    hibernate:
+      #配置指明在程序启动的时候要删除并且创建实体类对应的表
+      ddl-auto: none
+
+#mybatis:
+#  mapper-locations: classpath:mapper/*.xml
+#  type-aliases-package: com.example.demo.model
 
 server:
   port: 9000
